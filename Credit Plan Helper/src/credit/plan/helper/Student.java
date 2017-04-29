@@ -17,24 +17,6 @@ public class Student {
     private String minor;
     
     /**
-     * #init student object.
-     * @param name 
-     * @param department
-     * @param school
-     * @param majorElective
-     * @param minor 
-     */
-    public void Student(String name, String department, String school,
-            String majorElective, String minor){
-        
-        this.department = department;
-        this.name = name;
-        this.school = school;
-        this.majorElective = majorElective;
-        this.minor = minor;
-        
-    }
-    /**
      * 
      * @param name for set a new name.
      */
