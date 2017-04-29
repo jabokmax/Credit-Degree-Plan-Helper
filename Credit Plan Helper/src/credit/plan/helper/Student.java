@@ -68,6 +68,14 @@ public class Student {
     
     /**
      * 
+     * @param school for set a new major school.
+     */
+    public void setSchool(String school){
+        this.school = school;
+    }
+    
+    /**
+     * 
      * @return name of Student.
      */
     public String getName(){
@@ -76,9 +84,33 @@ public class Student {
     
     /**
      * 
-     * @return Student's Department 
+     * @return Student's Department.
      */
     public String getDep(){
         return this.department;
+    }
+    
+    /**
+     * 
+     * @return Student's major Elective.
+     */
+    public String getMajor(){
+        return this.majorElective;
+    }
+    
+    /**
+     * 
+     * @return Student's Minor.
+     */
+    public String getMinor(){
+        return this.minor;
+    }
+    
+    /**
+     * 
+     * @return Student's School.
+     */
+    public String getSchool(){
+        return this.school;
     }
 }
