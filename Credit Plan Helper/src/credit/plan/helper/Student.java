@@ -42,4 +42,43 @@ public class Student {
         this.name = name;
     }
     
+    /**
+     * 
+     * @param department for set a new department.
+     */
+    public void setDep(String department){
+        this.department = department;
+    }
+    
+    /**
+     * 
+     * @param majorElective for set a new major Elective.
+     */
+    public void setMajor(String majorElective){
+        this.majorElective = majorElective;
+    }
+    
+    /**
+     * 
+     * @param minor for set a new Minor.
+     */
+    public void setMinor(String minor){
+        this.minor = minor;
+    }
+    
+    /**
+     * 
+     * @return name of Student.
+     */
+    public String getName(){
+        return this.name;
+    }
+    
+    /**
+     * 
+     * @return Student's Department 
+     */
+    public String getDep(){
+        return this.department;
+    }
 }
