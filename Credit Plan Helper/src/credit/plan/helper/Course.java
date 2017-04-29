@@ -27,14 +27,39 @@ package credit.plan.helper;
  *
  * @author Phuwit
  */
-public class CreditPlanHelper {
-
+public class Course {
+    private String courseId;
+    private String name;
+    private String type;
+    private int credit;
+    private int year, term;
+    
     /**
-     * @param args the command line arguments
+     * 
+     * @param courseId for set new course Id.
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
+    public void setCourseId(String courseId){
+        this.courseId = courseId;
+    }
+    
+    /**
+     * 
+     * @param name for set new name.
+     */
+    public void setName(String name){
+        this.name = name;
+    } 
+    
+    /**
+     * 
+     * @param credit for set new credit.
+     */
+    public void setCredit(int credit){
+        this.credit = credit;
+    }
+    
+    public void setType(String type){
+        this.type = type;
     }
     
 }

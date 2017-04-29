@@ -27,14 +27,6 @@ package credit.plan.helper;
  *
  * @author Phuwit
  */
-public class CreditPlanHelper {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-    }
+public class Category {
     
 }
