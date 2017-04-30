@@ -30,6 +30,13 @@ package credit.plan.helper;
 public class Degree {
     private String Desc;
     private int requireCredit;
-    private int cntDegree;
+    private int cntCourse;
     
+    public Degree(){
+        cntCourse = 0;
+    }
+    
+    public void test(){
+        System.out.println("Ok");
+    }
 }

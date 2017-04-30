@@ -33,7 +33,8 @@ public class Student {
     private String school;
     private String majorElective;
     private String minor;
-    private Degree[] degree;
+    public Degree[] degree;
+    private int cntDeg;
     
     /**
      * #init new student.
@@ -50,6 +51,9 @@ public class Student {
         this.school = school;
         this.majorElective = majorElective;
         this.minor = minor;
+        
+        cntDeg = -1;
+        degree = new Degree[10];
     }
     
     /**
@@ -130,5 +134,10 @@ public class Student {
      */
     public String getSchool(){
         return this.school;
+    }
+    
+    public void addDegree(){
+        cntDeg++;
+        degree[cntDeg] = new Degree();
     }
 }

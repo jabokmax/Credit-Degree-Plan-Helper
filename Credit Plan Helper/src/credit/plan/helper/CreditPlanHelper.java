@@ -34,7 +34,9 @@ public class CreditPlanHelper {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        Student std = new Student("Max", "CS", "ITI", "n/a", "n/a");
+        std.addDegree();
+        std.degree[0].test();
         
     }
     
