@@ -35,6 +35,26 @@ public class Course {
     private int year, term;
     
     /**
+     * #init new Course.
+     * @param courseId
+     * @param name
+     * @param type
+     * @param credit
+     * @param year
+     * @param term 
+     */
+    public Course(String courseId, String name, String type, int credit,
+            int year, int term){
+        
+        this.courseId = courseId;
+        this.name = name;
+        this.type = type;
+        this.credit = credit;
+        this.year = year;
+        this.term = term;
+    }
+    
+    /**
      * 
      * @param courseId for set new course Id.
      */
