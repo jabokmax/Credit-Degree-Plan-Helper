@@ -27,6 +27,9 @@ package credit.plan.helper;
  *
  * @author Phuwit
  */
-public class Category {
+public class Degree {
+    private String Desc;
+    private int requireCredit;
+    private int cntDegree;
     
 }
