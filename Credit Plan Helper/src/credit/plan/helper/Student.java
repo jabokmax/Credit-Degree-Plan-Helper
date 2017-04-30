@@ -33,6 +33,24 @@ public class Student {
     private String school;
     private String majorElective;
     private String minor;
+    private Degree[] degree;
+    
+    /**
+     * #init new student.
+     * @param name
+     * @param department
+     * @param school
+     * @param majorElective
+     * @param minor 
+     */
+    public Student(String name, String department, String school,
+            String majorElective, String minor){
+        this.name = name;
+        this.department = department;
+        this.school = school;
+        this.majorElective = majorElective;
+        this.minor = minor;
+    }
     
     /**
      * 
