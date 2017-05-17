@@ -23,6 +23,9 @@
  */
 package credit.plan.helper;
 
+import java.awt.List;
+import java.util.ArrayList;
+
 /**
  *
  * @author Phuwit
@@ -31,12 +34,44 @@ public class Degree {
     private String Desc;
     private int requireCredit;
     private int cntCourse;
+    private Course[] courseList;
+    //private List<Course> course = new ArrayList<Course>(courseList);
     
-    public Degree(){
+    public Degree(String desc){
         cntCourse = 0;
+        Desc = desc;
+        
     }
     
-    public void test(){
-        System.out.println("Ok");
+    /**
+     * 
+     * @param Desc for set a new Description
+     */
+    public void setDesc(String Desc){
+        this.Desc = Desc;
+    }
+    
+    /**
+     * 
+     * @param requireCredit for set a new require Credit
+     */
+    public void setReqCredit(int requireCredit){
+        this.requireCredit = requireCredit;
+    }
+    
+    /**
+     * 
+     * @return Description
+     */
+    public String getDesc(){
+        return Desc;
+    }
+    
+    /**
+     * 
+     * @return require Credit
+     */
+    public int getRegCregit(){
+        return requireCredit;
     }
 }

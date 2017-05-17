@@ -22,21 +22,39 @@
  * THE SOFTWARE.
  */
 package credit.plan.helper;
+import jdk.nashorn.api.scripting.JSObject;
+import org.json.*;
 
 /**
  *
  * @author Phuwit
  */
 public class CreditPlanHelper {
-
     /**
      * @param args the command line arguments
      */
+    
+    private JSONObject obj = new JSONObject();
+    
     public static void main(String[] args) {
         // TODO code application logic here
         Student std = new Student("Max", "CS", "ITI", "n/a", "n/a");
-        std.addDegree();
-        std.degree[0].test();
+        std.addDegree("Major");
+        std.addDegree("Minor");
+        
+        
+        System.out.println(std.degree.size());
+        System.out.println(std.degree.get(0).getDesc());
+        System.out.println(std.degree.get(1).getDesc());
+
+        
+    }
+    
+    private void readJSONFile(){
+        
+    }
+    
+    private void writeJSINFile(){
         
     }
     

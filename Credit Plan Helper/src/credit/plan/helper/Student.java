@@ -23,6 +23,9 @@
  */
 package credit.plan.helper;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  *
  * @author Phuwit
@@ -33,8 +36,7 @@ public class Student {
     private String school;
     private String majorElective;
     private String minor;
-    public Degree[] degree;
-    private int cntDeg;
+    public List<Degree> degree = new ArrayList<Degree>();
     
     /**
      * #init new student.
@@ -52,8 +54,6 @@ public class Student {
         this.majorElective = majorElective;
         this.minor = minor;
         
-        cntDeg = -1;
-        degree = new Degree[10];
     }
     
     /**
@@ -136,8 +136,7 @@ public class Student {
         return this.school;
     }
     
-    public void addDegree(){
-        cntDeg++;
-        degree[cntDeg] = new Degree();
+    public void addDegree(String desc){
+        degree.add(new Degree(desc));
     }
 }
