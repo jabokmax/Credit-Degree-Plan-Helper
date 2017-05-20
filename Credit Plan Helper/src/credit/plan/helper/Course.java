@@ -37,7 +37,6 @@ public class Course {
      * #init new Course.
      * @param courseId
      * @param name
-     * @param type
      * @param credit
      * @param year
      * @param term 
@@ -75,9 +74,23 @@ public class Course {
     public void setCredit(int credit){
         this.credit = credit;
     }
-    
+    public void setTerm(int term){
+        this.term = term;
+    }
+    public void setYear(int year){
+        this.year = year;
+    }
     public String getName(){
         return name;
-    } 
-    
+    }
+
+    public int getCredit(){
+        return credit;
+    }
+    public int getYear(){
+        return year;
+    }
+    public int getTerm(){
+        return term;
+    }
 }

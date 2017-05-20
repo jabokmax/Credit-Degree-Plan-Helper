@@ -27,6 +27,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -42,13 +44,22 @@ public class CreditPlanHelper {
      */
     
     private static JSONObject obj  = new JSONObject();
-
+    private static List<Student> std = new ArrayList<Student>();
     
     public static void main(String[] args) throws ParseException, IOException {
-        // TODO code application logic here
+        
         readJSONFile();
-        Student std;
+        updateStudent();
+        
+        System.out.println(std.get(1).degree.get(0).course.get(0).getName());
+        System.out.println(std.get(1).degree.get(0).getRegCregit());
+        System.out.println(std.get(0).degree.get(0).getRegCregit());
         /*
+        
+        
+        System.out.println(std.size());
+        System.out.println(std.get(1).getName());
+        
         std = new Student("Max", "CS", "ITI", "n/a", "n/a");
         std.addDegree("Major");
         std.addDegree("Minor");
@@ -71,25 +82,91 @@ public class CreditPlanHelper {
             JSONObject temp = (JSONObject) parser.parse(new FileReader(
                 "save.json"));
             System.out.println("File Opened.");
-            System.out.println(temp);
             obj = temp;
-
+            //System.out.println(obj);
+            
         }
         catch(FileNotFoundException e){
-            tempStr = "{\"std\":[5,6]}";
+            tempStr = "{\"std\":[]}";
+            obj = (JSONObject) parser.parse(tempStr);
             System.out.println("File not Found Create a new one.");
-                        try (FileWriter file = new FileWriter("save.json")) {
-			file.write(tempStr);
-			System.out.println("Successfully Copied JSON Object to File...");
-			System.out.println("JSON Object: " + tempStr);
-		}
+            
+            try (FileWriter file = new FileWriter("save.json")) {
+		file.write(obj.toJSONString());
+		System.out.println("Successfully Create JSON Object to File...");
+		//System.out.println("JSON Object: " + tempStr);
+            }
         }
         catch(ParseException e){
             System.out.println("Error to parse file Please Delete ' save.json ' file.");
         }
     }
     
-    public void writeJSINFile(){
+    public void writeJSINFile() throws IOException{
+        try (FileWriter file = new FileWriter("save.json")) {
+            file.write(obj.toJSONString());
+            System.out.println("Successfully Copied JSON Object to File...");
+            //System.out.println("JSON Object: " + tempStr);
+        }
+    }
+    
+    private static void updateStudent(){
+        // Student Object
+        String name;
+        String department;
+        String school;
+        String majorElective;
+        String minor;
+
+        
+        // Add Student
+        JSONArray getStdArray = (JSONArray) obj.get("std");
+        for(int i = 0; i < getStdArray.size(); i++){
+            
+            JSONObject tempStd = (JSONObject) getStdArray.get(i);
+            name = tempStd.get("name").toString();
+            department = tempStd.get("department").toString();
+            school = tempStd.get("school").toString();
+            majorElective = tempStd.get("major").toString();
+            minor = tempStd.get("minor").toString();
+            std.add(new Student(name, department, school, majorElective, minor));
+            
+            //Add Degree
+            // Degree Object
+            String desc;
+            int reqCredit;
+            
+            JSONArray getDegreeArray = (JSONArray) tempStd.get("degree");
+            for(int j = 0; j < getDegreeArray.size(); j++){
+                
+                JSONObject tempDegree = (JSONObject) getDegreeArray.get(j);
+                desc = tempDegree.get("desc").toString();
+                reqCredit = (int) tempDegree.get("reqCredit").hashCode();
+                std.get(i).addDegree(desc, reqCredit);
+                
+                // Add Course
+                // Course Object
+                String courseId;
+                String CourseName;
+                int credit;
+                int year, term;
+                
+                JSONArray getCourseArray = (JSONArray) tempDegree.get("course");
+                for(int k = 0; k < getCourseArray.size(); k++){
+                    JSONObject tempCourse = (JSONObject) getCourseArray.get(k);
+                    courseId = tempCourse.get("courseId").toString();
+                    CourseName = tempCourse.get("name").toString();
+                    credit = (int) tempCourse.get("credit").hashCode();
+                    year = (int) tempCourse.get("year").hashCode();
+                    term = (int) tempCourse.get("term").hashCode();
+                    
+                    std.get(i).degree.get(j).addCourse(courseId, CourseName, credit, year, term);
+                    
+                }
+                
+            }
+        }
+        
         
     }
     

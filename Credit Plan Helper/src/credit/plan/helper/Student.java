@@ -136,7 +136,7 @@ public class Student {
         return this.school;
     }
     
-    public void addDegree(String desc){
-        degree.add(new Degree(desc));
+    public void addDegree(String desc, int reqCredit){
+        degree.add(new Degree(desc, reqCredit));
     }
 }

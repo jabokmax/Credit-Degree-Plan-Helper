@@ -31,12 +31,13 @@ import java.util.ArrayList;
  * @author Phuwit
  */
 public class Degree {
-    private String Desc;
+    private String desc;
     private int requireCredit;
     public List<Course> course = new ArrayList<Course>();
     
-    public Degree(String desc){
-        Desc = desc;
+    public Degree(String desc, int requireCredit){
+        this.desc = desc;
+        this.requireCredit = requireCredit;
     }
     
     /**
@@ -44,7 +45,7 @@ public class Degree {
      * @param Desc for set a new Description
      */
     public void setDesc(String Desc){
-        this.Desc = Desc;
+        this.desc = Desc;
     }
     
     /**
@@ -60,7 +61,7 @@ public class Degree {
      * @return Description
      */
     public String getDesc(){
-        return Desc;
+        return desc;
     }
     
     /**
