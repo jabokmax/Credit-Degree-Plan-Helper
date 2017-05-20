@@ -24,8 +24,10 @@
 package credit.plan.helper;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -39,12 +41,15 @@ public class CreditPlanHelper {
      * @param args the command line arguments
      */
     
-    private JSONObject obj = new JSONObject();
+    private static JSONObject obj  = new JSONObject();
+
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException, IOException {
         // TODO code application logic here
         readJSONFile();
-        Student std = new Student("Max", "CS", "ITI", "n/a", "n/a");
+        Student std;
+        /*
+        std = new Student("Max", "CS", "ITI", "n/a", "n/a");
         std.addDegree("Major");
         std.addDegree("Minor");
         
@@ -54,21 +59,33 @@ public class CreditPlanHelper {
         System.out.println(std.degree.get(0).getDesc());
         System.out.println(std.degree.get(0).course.get(0).getName());
         System.out.println(std.degree.get(1).getDesc());
+        */
 
         
     }
     
     private static void readJSONFile() throws ParseException, IOException{
         JSONParser parser = new JSONParser();
+        String tempStr;
         try{
-            JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(
+            JSONObject temp = (JSONObject) parser.parse(new FileReader(
                 "save.json"));
+            System.out.println("File Opened.");
+            System.out.println(temp);
+            obj = temp;
+
         }
         catch(FileNotFoundException e){
+            tempStr = "{\"std\":[5,6]}";
             System.out.println("File not Found Create a new one.");
+                        try (FileWriter file = new FileWriter("save.json")) {
+			file.write(tempStr);
+			System.out.println("Successfully Copied JSON Object to File...");
+			System.out.println("JSON Object: " + tempStr);
+		}
         }
         catch(ParseException e){
-            System.out.println("Error to parse file Please Delete ' save.json ' filr.");
+            System.out.println("Error to parse file Please Delete ' save.json ' file.");
         }
     }
     
