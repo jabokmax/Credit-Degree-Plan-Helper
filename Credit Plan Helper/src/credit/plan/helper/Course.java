@@ -30,7 +30,6 @@ package credit.plan.helper;
 public class Course {
     private String courseId;
     private String name;
-    private String type;
     private int credit;
     private int year, term;
     
@@ -43,12 +42,11 @@ public class Course {
      * @param year
      * @param term 
      */
-    public Course(String courseId, String name, String type, int credit,
+    public Course(String courseId, String name, int credit,
             int year, int term){
         
         this.courseId = courseId;
         this.name = name;
-        this.type = type;
         this.credit = credit;
         this.year = year;
         this.term = term;
@@ -78,8 +76,8 @@ public class Course {
         this.credit = credit;
     }
     
-    public void setType(String type){
-        this.type = type;
-    }
+    public String getName(){
+        return name;
+    } 
     
 }

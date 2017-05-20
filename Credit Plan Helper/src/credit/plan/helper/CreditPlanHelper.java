@@ -22,9 +22,14 @@
  * THE SOFTWARE.
  */
 package credit.plan.helper;
-import jdk.nashorn.api.scripting.JSObject;
-import org.json.*;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 /**
  *
  * @author Phuwit
@@ -38,23 +43,36 @@ public class CreditPlanHelper {
     
     public static void main(String[] args) {
         // TODO code application logic here
+        readJSONFile();
         Student std = new Student("Max", "CS", "ITI", "n/a", "n/a");
         std.addDegree("Major");
         std.addDegree("Minor");
         
+        std.degree.get(0).addCourse("CS100", "Introduction to Com Sci", 3, 1, 1);
         
         System.out.println(std.degree.size());
         System.out.println(std.degree.get(0).getDesc());
+        System.out.println(std.degree.get(0).course.get(0).getName());
         System.out.println(std.degree.get(1).getDesc());
 
         
     }
     
-    private void readJSONFile(){
-        
+    private static void readJSONFile() throws ParseException, IOException{
+        JSONParser parser = new JSONParser();
+        try{
+            JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(
+                "save.json"));
+        }
+        catch(FileNotFoundException e){
+            System.out.println("File not Found Create a new one.");
+        }
+        catch(ParseException e){
+            System.out.println("Error to parse file Please Delete ' save.json ' filr.");
+        }
     }
     
-    private void writeJSINFile(){
+    public void writeJSINFile(){
         
     }
     

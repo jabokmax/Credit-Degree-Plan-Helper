@@ -23,7 +23,7 @@
  */
 package credit.plan.helper;
 
-import java.awt.List;
+import java.util.List;
 import java.util.ArrayList;
 
 /**
@@ -33,14 +33,10 @@ import java.util.ArrayList;
 public class Degree {
     private String Desc;
     private int requireCredit;
-    private int cntCourse;
-    private Course[] courseList;
-    //private List<Course> course = new ArrayList<Course>(courseList);
+    public List<Course> course = new ArrayList<Course>();
     
     public Degree(String desc){
-        cntCourse = 0;
         Desc = desc;
-        
     }
     
     /**
@@ -73,5 +69,10 @@ public class Degree {
      */
     public int getRegCregit(){
         return requireCredit;
+    }
+    
+    public void addCourse(String courseId, String name, int credit,
+            int year, int term){
+        course.add(new Course(courseId, name, credit, year, term));
     }
 }
