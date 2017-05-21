@@ -29,6 +29,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 import netscape.javascript.JSObject;
 
 import org.json.simple.JSONArray;
@@ -46,18 +47,15 @@ public class CreditPlanHelper {
     
     private static JSONObject obj  = new JSONObject();
     private static JSONObject newObj = new JSONObject();
-    private static List<Student> std = new ArrayList<Student>();
+    public static List<Student> std = new ArrayList<Student>();
     
     public static void main(String[] args) throws ParseException, IOException {
         
         readJSONFile();
         updateStudent();
         
-        System.out.println(std.size());
-        
-        std.get(0).addDegree("GE", 12);
-        
-        System.out.println("Test "+ std.get(0).degree.size());
+        Profile frame = new Profile();
+        frame.setVisible(true);
         
         writeJSINFile();
         /*
@@ -118,7 +116,7 @@ public class CreditPlanHelper {
         for(int i = 0 ; i < std.size(); i++){
             tempInfo = new JSONObject();
             tempInfo.put("name", std.get(i).getName());
-            System.out.println(tempInfo.get("name"));
+            //System.out.println(tempInfo.get("name"));
             tempInfo.put("major", std.get(i).getMajor());
             tempInfo.put("minor", std.get(i).getMinor());
             tempInfo.put("school", std.get(i).getSchool());
@@ -150,16 +148,16 @@ public class CreditPlanHelper {
                 tempDegree.add(degree);
             }
             tempInfo.put("degree", tempDegree);
-            System.out.println(tempInfo);
+            //System.out.println(tempInfo);
             // end
             data.add(tempInfo);
 
-            System.out.println(data);
+            //System.out.println(data);
 
         }
         newObj.put("std", data);
         
-        try (FileWriter file = new FileWriter("save_test.json")) {
+        try (FileWriter file = new FileWriter("save.json")) {
             file.write(newObj.toJSONString());
             System.out.println("Successfully Copied new JSON Object to File...");
             //System.out.println("JSON Object: " + tempStr);
