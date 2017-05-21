@@ -23,9 +23,7 @@
  */
 package credit.plan.helper;
 
-import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
 
 /**
  *
@@ -36,6 +34,8 @@ public class Profile extends javax.swing.JFrame {
     /**
      * Creates new form profile
      */
+    public static int stdIndex;
+    
     public Profile() {
         initComponents();
         updateList();
@@ -45,7 +45,7 @@ public class Profile extends javax.swing.JFrame {
     public static void updateList(){
         DefaultListModel model = new DefaultListModel();
         for(int i = 0; i < CreditPlanHelper.std.size(); i++) {
-            model.addElement(CreditPlanHelper.std.get(i).getName());
+            model.addElement(CreditPlanHelper.std.get(i).getName()+ "  " + CreditPlanHelper.std.get(i).getDep());
         }
         jList1.setModel(model);
     }
@@ -75,6 +75,11 @@ public class Profile extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(400, 300));
 
         jButton1.setText("Open");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Select Profile");
 
@@ -172,6 +177,14 @@ public class Profile extends javax.swing.JFrame {
         
         updateList();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        stdIndex = jList1.getSelectedIndex();
+        
+        Dashboard frame = new Dashboard(stdIndex);
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
