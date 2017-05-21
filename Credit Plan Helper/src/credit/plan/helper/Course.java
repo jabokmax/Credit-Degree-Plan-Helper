@@ -93,4 +93,7 @@ public class Course {
     public int getTerm(){
         return term;
     }
+    public String getCourseID(){
+        return courseId;
+    }
 }

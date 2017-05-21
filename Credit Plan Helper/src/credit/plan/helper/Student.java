@@ -25,6 +25,8 @@ package credit.plan.helper;
 
 import java.util.List;
 import java.util.ArrayList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -138,5 +140,16 @@ public class Student {
     
     public void addDegree(String desc, int reqCredit){
         degree.add(new Degree(desc, reqCredit));
+        
+        /*JSONObject tempObj = new JSONObject();
+        tempObj.put("desc", desc);
+        tempObj.put("reqCredit", reqCredit);
+        tempObj.put("course", "[]");
+        
+        JSONArray getStdList = (JSONArray) CreditPlanHelper.obj.get("std");
+        JSONObject getStdName = (JSONObject) getStdList.get(index);
+        JSONArray getDegree = (JSONArray) getStdName.get("degree");
+        getDegree.add(tempObj.toJSONString());
+        */
     }
 }

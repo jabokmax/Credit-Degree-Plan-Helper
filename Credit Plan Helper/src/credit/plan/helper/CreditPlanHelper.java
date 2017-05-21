@@ -29,6 +29,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import netscape.javascript.JSObject;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -44,6 +45,7 @@ public class CreditPlanHelper {
      */
     
     private static JSONObject obj  = new JSONObject();
+    private static JSONObject newObj = new JSONObject();
     private static List<Student> std = new ArrayList<Student>();
     
     public static void main(String[] args) throws ParseException, IOException {
@@ -51,9 +53,13 @@ public class CreditPlanHelper {
         readJSONFile();
         updateStudent();
         
-        System.out.println(std.get(1).degree.get(0).course.get(0).getName());
-        System.out.println(std.get(1).degree.get(0).getRegCregit());
-        System.out.println(std.get(0).degree.get(0).getRegCregit());
+        System.out.println(std.size());
+        
+        std.get(0).addDegree("GE", 12);
+        
+        System.out.println("Test "+ std.get(0).degree.size());
+        
+        writeJSINFile();
         /*
         
         
@@ -83,6 +89,7 @@ public class CreditPlanHelper {
                 "save.json"));
             System.out.println("File Opened.");
             obj = temp;
+            newObj = obj;
             //System.out.println(obj);
             
         }
@@ -102,10 +109,59 @@ public class CreditPlanHelper {
         }
     }
     
-    public void writeJSINFile() throws IOException{
-        try (FileWriter file = new FileWriter("save.json")) {
-            file.write(obj.toJSONString());
-            System.out.println("Successfully Copied JSON Object to File...");
+    public static void writeJSINFile() throws IOException{
+        newObj.clear();
+        JSONArray data = new JSONArray();
+        
+        // add info
+        JSONObject tempInfo;
+        for(int i = 0 ; i < std.size(); i++){
+            tempInfo = new JSONObject();
+            tempInfo.put("name", std.get(i).getName());
+            System.out.println(tempInfo.get("name"));
+            tempInfo.put("major", std.get(i).getMajor());
+            tempInfo.put("minor", std.get(i).getMinor());
+            tempInfo.put("school", std.get(i).getSchool());
+            tempInfo.put("department", std.get(i).getDep());
+            
+            // add all object to Degree
+            JSONArray tempDegree = new JSONArray();
+            JSONObject degree;
+            for(int j = 0; j < std.get(i).degree.size(); j++){
+                degree = new JSONObject();
+                degree.put("reqCredit", std.get(i).degree.get(j).getRegCregit());
+                degree.put("desc", std.get(i).degree.get(j).getDesc());
+                
+                // add all object to Course
+                JSONArray tempCourse = new JSONArray();
+                JSONObject course;
+                for(int k = 0; k < std.get(i).degree.get(j).course.size(); k++){
+                    course = new JSONObject();
+                    course.put("year", std.get(i).degree.get(j).course.get(k).getYear());
+                    course.put("name", std.get(i).degree.get(j).course.get(k).getName());
+                    course.put("term", std.get(i).degree.get(j).course.get(k).getTerm());
+                    course.put("credit", std.get(i).degree.get(j).course.get(k).getCredit());
+                    course.put("courseId", std.get(i).degree.get(j).course.get(k).getCourseID());
+                    
+                    tempCourse.add(course);
+                    
+                }
+                degree.put("course", tempCourse);
+                tempDegree.add(degree);
+            }
+            tempInfo.put("degree", tempDegree);
+            System.out.println(tempInfo);
+            // end
+            data.add(tempInfo);
+
+            System.out.println(data);
+
+        }
+        newObj.put("std", data);
+        
+        try (FileWriter file = new FileWriter("save_test.json")) {
+            file.write(newObj.toJSONString());
+            System.out.println("Successfully Copied new JSON Object to File...");
             //System.out.println("JSON Object: " + tempStr);
         }
     }
@@ -165,9 +221,7 @@ public class CreditPlanHelper {
                 }
                 
             }
-        }
-        
-        
+        } 
     }
     
 }
