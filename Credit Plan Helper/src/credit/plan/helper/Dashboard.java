@@ -35,20 +35,46 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard
      */
-    public static int index;
-    public Dashboard(int index) {
-        this.index = index;
+    public static int stdIndex;
+    public static int select;
+    public Dashboard(int stdIndex) {
+        this.stdIndex = stdIndex;
         initComponents();
         updateList();
         
     }
     
      public static void updateList(){
+        int earned = 0;
+        int totalRegCredit = 0;
+        int totalEarned = 0;
         DefaultListModel model = new DefaultListModel();
-        for(int i = 0; i < CreditPlanHelper.std.get(index).degree.size(); i++) {
-            model.addElement(CreditPlanHelper.std.get(index).degree.get(i).getDesc());
+        for(int i = 0; i < CreditPlanHelper.std.get(stdIndex).degree.size(); i++) {
+            earned = 0;
+            totalRegCredit += CreditPlanHelper.std.get(stdIndex).degree.get(i).getRegCregit();
+            
+            for(int j = 0 ; j < CreditPlanHelper.std.get(stdIndex).degree.get(i).course.size(); j++){
+                earned += CreditPlanHelper.std.get(stdIndex).degree.get(i).course.get(j).getCredit();
+                
+            }
+            model.addElement(CreditPlanHelper.std.get(stdIndex).degree.get(i).getDesc()+ " -  Require: "+
+                    CreditPlanHelper.std.get(stdIndex).degree.get(i).getRegCregit()+ " | Earned : "+
+                    earned);
+            totalEarned += earned;
         }
         jList1.setModel(model);
+        
+        /*earned = 0;
+        for(int i = 0; i < CreditPlanHelper.std.get(stdIndex).degree.size(); i++){
+        totleRegCredit += CreditPlanHelper.std.get(stdIndex).degree.get(i).getRegCregit();
+        for(int j = 0 ; j < CreditPlanHelper.std.get(stdIndex).degree.get(i).course.size(); j++){
+        earned += CreditPlanHelper.std.get(stdIndex).degree.get(i).course.get(j).getCredit();
+        }
+        }*/
+        jLabel5.setText(""+totalRegCredit);
+        jLabel6.setText(""+totalEarned);
+        jLabel7.setText(""+(totalRegCredit - totalEarned));
+        
     }
 
     /**
@@ -74,7 +100,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
 
-        setTitle(CreditPlanHelper.std.get(index).getName() +" Dashboard");
+        setTitle(CreditPlanHelper.std.get(stdIndex).getName() +" Dashboard");
 
         jButton1.setText("Add Group");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -101,9 +127,9 @@ public class Dashboard extends javax.swing.JFrame {
 
         jLabel1.setText("Summary");
 
-        jLabel2.setText("Total Credit :");
+        jLabel2.setText("Require Credit :");
 
-        jLabel3.setText("Eerned :");
+        jLabel3.setText("Earned ;");
 
         jLabel4.setText("Remain :");
 
@@ -114,6 +140,11 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel7.setText("jLabel7");
 
         jButton4.setText("Course Manage");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,16 +214,23 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        AddDegree frame = new AddDegree(index);
+        AddDegree frame = new AddDegree(stdIndex);
         frame.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int select = jList1.getSelectedIndex();
-        CreditPlanHelper.std.get(index).degree.remove(select);
+        CreditPlanHelper.std.get(stdIndex).degree.remove(select);
         updateList();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        select = jList1.getSelectedIndex();
+        CourseManage frame = new CourseManage(select);
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,9 +276,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private static javax.swing.JLabel jLabel5;
+    private static javax.swing.JLabel jLabel6;
+    private static javax.swing.JLabel jLabel7;
     private static javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

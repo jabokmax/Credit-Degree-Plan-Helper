@@ -23,6 +23,9 @@
  */
 package credit.plan.helper;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
@@ -176,6 +179,11 @@ public class Profile extends javax.swing.JFrame {
         CreditPlanHelper.std.remove(select);
         
         updateList();
+        try {
+            CreditPlanHelper.writeJSINFile();
+        } catch (IOException ex) {
+            Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
