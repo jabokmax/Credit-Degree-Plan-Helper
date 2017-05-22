@@ -24,6 +24,7 @@
 package credit.plan.helper;
 
 
+import static credit.plan.helper.Dashboard.stdIndex;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,10 +50,21 @@ public class CourseManage extends javax.swing.JFrame {
     }
      public static void updateList(){
         DefaultListModel model = new DefaultListModel();
+        int credit = 0;
+        int totalEarned = 0;
         for(int i = 0; i < CreditPlanHelper.std.get(stdIndex).degree.get(degreeIndex).course.size(); i++) {
-            model.addElement(CreditPlanHelper.std.get(stdIndex).degree.get(degreeIndex).course.get(i).getName());
+            credit = 0;
+            credit += CreditPlanHelper.std.get(stdIndex).degree.get(degreeIndex).course.get(i).getCredit();
+            
+            model.addElement(CreditPlanHelper.std.get(stdIndex).degree.get(degreeIndex).course.get(i).getName()+" - Credit : "+
+                    credit);
+            totalEarned += credit;
         }
         jList1.setModel(model);
+        
+        jLabel5.setText(""+ CreditPlanHelper.std.get(stdIndex).degree.get(degreeIndex).getRegCregit());
+        jLabel6.setText(""+ totalEarned);
+        jLabel7.setText(""+ (CreditPlanHelper.std.get(stdIndex).degree.get(degreeIndex).getRegCregit()-totalEarned));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,7 +79,6 @@ public class CourseManage extends javax.swing.JFrame {
         jList1 = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -98,8 +109,6 @@ public class CourseManage extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        jButton3.setText("Edit Course");
 
         jLabel1.setText("Summary");
 
@@ -138,8 +147,7 @@ public class CourseManage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -151,9 +159,7 @@ public class CourseManage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(44, 44, 44)
                         .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -233,14 +239,13 @@ public class CourseManage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private static javax.swing.JLabel jLabel5;
+    private static javax.swing.JLabel jLabel6;
+    private static javax.swing.JLabel jLabel7;
     private static javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
